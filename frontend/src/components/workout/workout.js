@@ -1,11 +1,11 @@
 import React from "react";
 
-const HealthInfo = () => {
+const Workout = () => {
     return (
         <div className="flex flex-row min-h-screen justify-center items-center bg-pf-gray text-pf-white">
-            <h1>Health Info</h1>
+            <h1>Workout</h1>
         </div>
     );
 }
 
-export default HealthInfo;
+export default Workout;
