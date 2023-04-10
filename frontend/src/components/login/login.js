@@ -22,7 +22,7 @@ const Login = () => {
                     <div className="flex items-center justify-between">
                     <Link to="/dashboard">
                         <button className="bg-pf-mint font-bold py-2 px-4 rounded" type="submit">
-                            Sign In
+                            Log In
                         </button>
                     </Link>
                     </div>
