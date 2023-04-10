@@ -19,7 +19,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/healthinfo" element={<HealthInfo />} />
         <Route path="/workout" element={<Workout />} />
-        <Route path="/progress" element={<Progress />} />
+        <Route path="/progress" element={<Progress />} /> 
         <Route path="/social" element={<Social />} />
       </Routes>
     </React.Fragment>
