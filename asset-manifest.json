@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/ProgressionFit/static/css/main.e4cf3e34.css",
-    "main.js": "/ProgressionFit/static/js/main.62651cb9.js",
-    "index.html": "/ProgressionFit/index.html",
-    "main.e4cf3e34.css.map": "/ProgressionFit/static/css/main.e4cf3e34.css.map",
-    "main.62651cb9.js.map": "/ProgressionFit/static/js/main.62651cb9.js.map"
+    "main.css": "/static/css/main.e4cf3e34.css",
+    "main.js": "/static/js/main.62651cb9.js",
+    "index.html": "/index.html",
+    "main.e4cf3e34.css.map": "/static/css/main.e4cf3e34.css.map",
+    "main.62651cb9.js.map": "/static/js/main.62651cb9.js.map"
   },
   "entrypoints": [
     "static/css/main.e4cf3e34.css",
