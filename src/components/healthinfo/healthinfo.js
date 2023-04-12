@@ -9,12 +9,12 @@ const HealthInfo = () => {
                 <h1 className="text-xl font-bold mb-2">Health Info</h1>
                 <div>
                     {/* Fields go here */}
-                    <h1 className="text-xl font-bold mb-2">Steps today: </h1>
-                    <h1 className="text-xl font-bold mb-2">Goal Steps: </h1>
-                    <h1 className="text-xl font-bold mb-2">Steps to Goal: </h1>
-                    <h1 className="text-xl font-bold mb-2">Heartrate Current: </h1>
-                    <h1 className="text-xl font-bold mb-2">Resting Heartrate: </h1>
-                    <h1 className="text-xl font-bold mb-2">Zone Minutes Today: </h1>
+                    <h1 className="text-xl mb-2">Steps today: </h1>
+                    <h1 className="text-xl mb-2">Goal Steps: </h1>
+                    <h1 className="text-xl mb-2">Steps to Goal: </h1>
+                    <h1 className="text-xl mb-2">Heartrate Current: </h1>
+                    <h1 className="text-xl mb-2">Resting Heartrate: </h1>
+                    <h1 className="text-xl mb-2">Zone Minutes Today: </h1>
                 </div>
                 <DashButton text="Sync" redirect="/healthinfo" />
                 <DashButton text="Back to Dashboard" redirect="/dashboard" />
