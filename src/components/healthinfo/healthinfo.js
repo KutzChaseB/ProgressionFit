@@ -8,38 +8,47 @@ const HealthInfo = () => {
     
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
-      };
+    };
     
       const handlePasswordChange = (event) => {
         setPassword(event.target.value);
-      };
-    
+    };
+
+    const handleSync = () => {
+      console.log(username + " " + password)
+    };
     
     return (
         <div className="flex flex-col min-h-screen justify-center items-center bg-pf-gray text-pf-white">
-            <div className="flex flex-col justify-center items-center bg-pf-field text-pf-gray px-5 py-5 rounded-md">
+            <div className="flex flex-col justify-center items-center bg-pf-field text-pf-gray px-5 py-4 rounded-md">
                 <h1 className="text-xl font-bold mb-2">Health Info</h1>
-                <div>
-                    <div className="flex flex-col mb-2">
-                <label className="text-xl mb-2">
-                Username:
-                <input type="text" value={username} onChange={handleUsernameChange} />
-              </label>
-              <label className="text-xl mb-2">
-                Password:
-                <input type="password" value={password} onChange={handlePasswordChange} />
-              </label>
-          </div>
-                    {/* Fields go here */}
+                <form className="px-8 pt-6 pb-4 mb-1">
+                    <h2 className="">Sign in to Garmin Connect</h2>
+                    <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                      Username
+                    </label>
+                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none 
+                    focus:shadow-outline" id="username" 
+                    type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
+                    </div>
+                    <div className="mb-6">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                      Password
+                    </label>
+                    <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-1 
+                    leading-tight focus:outline-none focus:shadow-outline" id="password" 
+                    type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+                    </div>
+                </form>
+                <div className="mb-9 text-md">
                     <h1 className="text-xl mb-2">Steps today: </h1>
                     <h1 className="text-xl mb-2">Goal Steps: </h1>
                     <h1 className="text-xl mb-2">Steps to Goal: </h1>
                     <h1 className="text-xl mb-2">Heartrate Current: </h1>
                     <h1 className="text-xl mb-2">Resting Heartrate: </h1>
-                    <h1 className="text-xl mb-2">Username: {username} </h1>
-                    <h1 className="text-xl mb-2">Password: {password} </h1>
                 </div>
-                <DashButton text="Sync" onClick={() => alert(`Username: ${username}\nPassword: ${password}`)} />
+                <DashButton text="Sync" action={handleSync} />
                 <DashButton text="Back to Dashboard" redirect="/dashboard" />
             </div>
         </div>
