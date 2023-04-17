@@ -31,7 +31,7 @@ const HealthInfo = () => {
       // )
 
       // POST DATA TO FLASK
-      fetch("http://127.0.0.1:5000/members",{
+      fetch("http://127.0.0.1:5000/garminapi",{
         method : "POST",
         cache : "no-cache",
         headers : {
