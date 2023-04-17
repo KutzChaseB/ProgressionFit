@@ -1,21 +1,48 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 
 import DashButton from "../../assets/dashbutton";
 
 const HealthInfo = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
-    };
-    
-      const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
+    const [garminInfo, setGarminInfo] = useState([{}]);
 
+    const handleUsernameChange = (event) => {
+      setUsername(event.target.value);
+    };
+    const handlePasswordChange = (event) => {
+      setPassword(event.target.value);
+    };
     const handleSync = () => {
       console.log(username + " " + password)
+      // GET DATA FROM FLASK
+      // fetch("http://127.0.0.1:5000/members", {
+      //   "method": "GET",
+      //   headers:{
+      //     "Accept": "application/json",
+      //     "Content-Type": "application/json",
+      //   },
+      // }).then(
+      //   res => res.json()
+      // ).then(
+      //   data => {
+      //     console.log(data);
+      //   }
+      // )
+
+      // POST DATA TO FLASK
+      fetch("http://127.0.0.1:5000/members",{
+        method : "POST",
+        cache : "no-cache",
+        headers : {
+          "content-type" : "application/json"
+        },
+        body:JSON.stringify(`{"username":"${username}", "password":"${password}"}`)
+      }).then (
+        res => res.json()
+      ).then(
+        data => console.log(data)
+      )
     };
     
     return (
