@@ -14,22 +14,6 @@ const HealthInfo = () => {
       setPassword(event.target.value);
     };
     const handleSync = () => {
-      console.log(username + " " + password)
-      // GET DATA FROM FLASK
-      // fetch("http://127.0.0.1:5000/members", {
-      //   "method": "GET",
-      //   headers:{
-      //     "Accept": "application/json",
-      //     "Content-Type": "application/json",
-      //   },
-      // }).then(
-      //   res => res.json()
-      // ).then(
-      //   data => {
-      //     console.log(data);
-      //   }
-      // )
-
       // POST DATA TO FLASK
       fetch("http://127.0.0.1:5000/garminapi",{
         method : "POST",
