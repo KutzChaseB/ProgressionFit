@@ -10,11 +10,13 @@ const HealthInfo = () => {
     const handleUsernameChange = (event) => {
       setUsername(event.target.value);
     };
+
     const handlePasswordChange = (event) => {
       setPassword(event.target.value);
     };
+
     const handleSync = () => {
-      // POST DATA TO FLASK
+      // FLASK API POST REQUEST
       fetch("http://127.0.0.1:5000/garminapi",{
         method : "POST",
         cache : "no-cache",
@@ -25,9 +27,54 @@ const HealthInfo = () => {
       }).then (
         res => res.json()
       ).then(
-        data => console.log(data)
+        data => {
+          setGarminInfo(data)
+          console.log(data);
+        }
       )
     };
+
+    const get_steps = () => {
+      try {
+        return garminInfo[0][0].totalSteps;
+      } catch{
+        return 0;
+      }
+    };
+
+    const get_goal_steps = () => {
+      try {
+        return garminInfo[0][0].stepGoal;
+      } catch{
+        return 0;
+      }
+    };
+
+    const get_steps_to_goal = () => {
+      try {
+        return (garminInfo[0][0].stepGoal - garminInfo[0][0].totalSteps);
+      } catch{
+        return 0;
+      }
+    };
+
+    const get_current_hr = () => {
+      try{
+        let hr_data = garminInfo[1].heartRateValues;
+        let current_hr = hr_data[hr_data.length - 1][1]; 
+        return current_hr;
+      } catch {
+        return 0;
+      }
+    };
+
+    const get_resting_hr = () => {
+      try {
+        return garminInfo[1].restingHeartRate;
+      } catch {
+        return 0;
+      }
+    }
     
     return (
         <div className="flex flex-col min-h-screen justify-center items-center bg-pf-gray text-pf-white">
@@ -53,11 +100,11 @@ const HealthInfo = () => {
                     </div>
                 </form>
                 <div className="mb-9 text-md">
-                    <h1 className="text-xl mb-2">Steps today: </h1>
-                    <h1 className="text-xl mb-2">Goal Steps: </h1>
-                    <h1 className="text-xl mb-2">Steps to Goal: </h1>
-                    <h1 className="text-xl mb-2">Heartrate Current: </h1>
-                    <h1 className="text-xl mb-2">Resting Heartrate: </h1>
+                    <h1 className="text-xl mb-2">Steps today: {get_steps()}</h1>
+                    <h1 className="text-xl mb-2">Goal Steps: {get_goal_steps()}</h1>
+                    <h1 className="text-xl mb-2">Steps to Goal: {get_steps_to_goal()}</h1>
+                    <h1 className="text-xl mb-2">Heartrate Current: {get_current_hr()}</h1>
+                    <h1 className="text-xl mb-2">Resting Heartrate: {get_resting_hr()}</h1>
                 </div>
                 <DashButton text="Sync" action={handleSync} />
                 <DashButton text="Back to Dashboard" redirect="/dashboard" />
