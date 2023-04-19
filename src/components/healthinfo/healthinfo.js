@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-
 import DashButton from "../../assets/dashbutton";
+
+
 
 const HealthInfo = () => {
     const [username, setUsername] = useState("");
@@ -33,7 +34,19 @@ const HealthInfo = () => {
         }
       )
     };
+    // this date method is javascript native and is assuming that the data being pulled from garmin
+    // is the same date
+    const date = new Date();
+    const get_date = () => {
+      try{
+        // padStart is used to add leading 0 in months that are before October (10) and in dates that are before 10
+      return (date.getMonth() + 1).toString().padStart(2, '0') + "-" + date.getDate().toString().padStart(2, '0') + "-" + date.getFullYear();
+      ;
+      }catch{
+        return 0;
+      }
 
+    }
     const get_steps = () => {
       try {
         return garminInfo[0][0].totalSteps;
@@ -53,6 +66,7 @@ const HealthInfo = () => {
     const get_steps_to_goal = () => {
       try {
         return (garminInfo[0][0].stepGoal - garminInfo[0][0].totalSteps);
+        // return get_goal_steps - get_steps
       } catch{
         return 0;
       }
@@ -100,6 +114,7 @@ const HealthInfo = () => {
                     </div>
                 </form>
                 <div className="mb-9 text-md">
+                    <h1 className="text-xl mb-2">Date: {get_date()}</h1>
                     <h1 className="text-xl mb-2">Steps today: {get_steps()}</h1>
                     <h1 className="text-xl mb-2">Goal Steps: {get_goal_steps()}</h1>
                     <h1 className="text-xl mb-2">Steps to Goal: {get_steps_to_goal()}</h1>
