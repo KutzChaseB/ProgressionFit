@@ -5,7 +5,6 @@ import ProgFitLogo from './ProgFitLogo.png';
 const Login = () => {
     return (
         <div className="flex flex-col min-h-screen justify-center items-center bg-pf-gray">
-            <h1 className="text-pf-white font-bold pb-5 text-lg">Progression Fit</h1>
             <img src={ProgFitLogo} alt="ProgFitLogo" width="200" height="200"/>
             <div className="w-full max-w-xs bg-pf-white rounded-md">
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
