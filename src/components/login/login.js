@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { SessionInfo } from "../context/context";
 import {Link} from 'react-router-dom';
 import ProgFitLogo from './ProgFitLogo.png';
 
 const Login = () => {
+    const { sessionInfo, setSessionInfo } = useContext(SessionInfo);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleUsername = (event) => {
+        setUsername(event.target.value);
+    };
+
+    const handlePassword = (event) => {
+        setPassword(event.target.value);
+    };
+
+    const validate = () => {
+        fetch("/validate_login", {
+            method : "POST",
+            cache : "no-cache",
+            headers : {
+                "content-type" : "application/json"
+            },
+            body : JSON.stringify(`{"username" : "${username}", "password" : "${password}"}`)
+        }).then(
+            res => res.json()
+        ).then(
+            data => {
+                setSessionInfo({
+                    "id" : data["sessionId"],
+                    "username" : data["username"]
+                })
+            }
+        )
+    }
+
     return (
         <div className="flex flex-col min-h-screen justify-center items-center bg-pf-gray">
             <img src={ProgFitLogo} alt="ProgFitLogo" width="200" height="200"/>
@@ -12,20 +45,18 @@ const Login = () => {
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                         Username
                     </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
+                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" value={username} onChange={handleUsername}/>
                     </div>
                     <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                         Password
                     </label>
-                    <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password" />
+                    <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password" value={password} onChange={handlePassword} />
                     </div>
                     <div className="flex items-center justify-between">
-                    <Link to="/dashboard">
-                        <button className="bg-pf-mint font-bold py-2 px-4 rounded" type="submit">
-                            Log In
-                        </button>
-                    </Link>
+                    <button className="bg-pf-mint font-bold py-2 px-4 rounded" type="button" onClick={validate}>
+                        Log In
+                    </button>
                     </div>
                 </form>
             </div>

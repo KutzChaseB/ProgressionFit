@@ -1,5 +1,6 @@
-import React from 'react';
-import { Route, Routes } from "react-router-dom"
+import React, { useState } from 'react';
+import {Route, Routes, Navigate } from "react-router-dom"
+import { SessionInfo } from './components/context/context';
 
 import Dashboard from './components/dashboard/dashboard';
 import HealthInfo from './components/healthinfo/healthinfo';
@@ -10,19 +11,24 @@ import Login from './components/login/login';
 import Signup from './components/signup/signup';
 
 function App() {
+  const [sessionInfo, setSessionInfo] = useState({
+    "id" : 0,
+    "username" : ""
+  });
+
   return (
-    <React.Fragment>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/healthinfo" element={<HealthInfo />} />
-        <Route path="/workout" element={<Workout />} />
-        <Route path="/progress" element={<Progress />} /> 
-        <Route path="/social" element={<Social />} />
-      </Routes>
-    </React.Fragment>
+    <SessionInfo.Provider value={{sessionInfo, setSessionInfo}}>
+        <Routes>
+          <Route path="/" element={sessionInfo["id"] <= 0 ? <Login /> : <Navigate to="/dashboard" replace />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Dashboard />} />
+          <Route path="/healthinfo" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <HealthInfo />} />
+          <Route path="/workout" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Workout />} />
+          <Route path="/progress" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Progress />} /> 
+          <Route path="/social" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Social />} />
+        </Routes>
+    </SessionInfo.Provider>
   );
 }
 

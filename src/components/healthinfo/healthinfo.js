@@ -18,7 +18,7 @@ const HealthInfo = () => {
 
     const handleSync = () => {
       // FLASK API POST REQUEST
-      fetch("http://127.0.0.1:5000/garminapi",{
+      fetch("/garminapi",{
         method : "POST",
         cache : "no-cache",
         headers : {
