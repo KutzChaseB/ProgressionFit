@@ -12,7 +12,7 @@ import Signup from './components/signup/signup';
 
 function App() {
   const [sessionInfo, setSessionInfo] = useState({
-    "id" : 1,
+    "id" : 0,
     "username" : ""
   });
 
