@@ -6,7 +6,11 @@ import DashButton from "../../assets/dashbutton";
 const HealthInfo = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [garminInfo, setGarminInfo] = useState([{}]);
+    const [steps, setSteps] = useState(0);
+    const [stepGoal, setStepGoal] = useState(0);
+    const [stepsToGoal, setStepsToGoal] = useState(0);
+    const [currentHr, setCurrentHr] = useState(0);
+    const [restingHr, setRestingHr] = useState(0);
 
     const handleUsernameChange = (event) => {
       setUsername(event.target.value);
@@ -17,8 +21,7 @@ const HealthInfo = () => {
     };
 
     const handleSync = () => {
-      // FLASK API POST REQUEST
-      fetch("/garminapi",{
+      fetch("/api/garmin",{
         method : "POST",
         cache : "no-cache",
         headers : {
@@ -29,67 +32,21 @@ const HealthInfo = () => {
         res => res.json()
       ).then(
         data => {
-          setGarminInfo(data)
-          console.log(data);
+          setSteps(data["steps"]);
+          setStepGoal(data["stepGoal"]);
+          setStepsToGoal(data["stepsToGoal"]);
+          setCurrentHr(data["currentHr"]);
+          setRestingHr(data["avgRestingHr"]);
         }
       )
-    };
-    // this date method is javascript native and is assuming that the data being pulled from garmin
-    // is the same date
-    const date = new Date();
-    const get_date = () => {
-      try{
-        // padStart is used to add leading 0 in months that are before October (10) and in dates that are before 10
-      return (date.getMonth() + 1).toString().padStart(2, '0') + "-" + date.getDate().toString().padStart(2, '0') + "-" + date.getFullYear();
-      ;
-      }catch{
-        return 0;
-      }
 
-    }
-    const get_steps = () => {
-      try {
-        return garminInfo[0][0].totalSteps;
-      } catch{
-        return 0;
-      }
     };
-
-    const get_goal_steps = () => {
-      try {
-        return garminInfo[0][0].stepGoal;
-      } catch{
-        return 0;
-      }
-    };
-
-    const get_steps_to_goal = () => {
-      try {
-        return (garminInfo[0][0].stepGoal - garminInfo[0][0].totalSteps);
-        // return get_goal_steps - get_steps
-      } catch{
-        return 0;
-      }
-    };
-
-    const get_current_hr = () => {
-      try{
-        let hr_data = garminInfo[1].heartRateValues;
-        let current_hr = hr_data[hr_data.length - 1][1]; 
-        return current_hr;
-      } catch {
-        return 0;
-      }
-    };
-
-    const get_resting_hr = () => {
-      try {
-        return garminInfo[1].restingHeartRate;
-      } catch {
-        return 0;
-      }
-    }
     
+    const get_date = () => {
+      const date = new Date();
+      return (date.getMonth() + 1).toString().padStart(2, '0') + "-" + date.getDate().toString().padStart(2, '0') + "-" + date.getFullYear();
+    }
+
     return (
         <div className="flex flex-col min-h-screen justify-center items-center bg-pf-gray text-pf-white">
             <div className="flex flex-col justify-center items-center bg-pf-field text-pf-gray px-5 py-4 rounded-md">
@@ -115,11 +72,11 @@ const HealthInfo = () => {
                 </form>
                 <div className="mb-9 text-md">
                     <h1 className="text-xl mb-2">Date: {get_date()}</h1>
-                    <h1 className="text-xl mb-2">Steps today: {get_steps()}</h1>
-                    <h1 className="text-xl mb-2">Goal Steps: {get_goal_steps()}</h1>
-                    <h1 className="text-xl mb-2">Steps to Goal: {get_steps_to_goal()}</h1>
-                    <h1 className="text-xl mb-2">Heartrate Current: {get_current_hr()}</h1>
-                    <h1 className="text-xl mb-2">Resting Heartrate: {get_resting_hr()}</h1>
+                    <h1 className="text-xl mb-2">Steps today: {steps}</h1>
+                    <h1 className="text-xl mb-2">Goal Steps: {stepGoal}</h1>
+                    <h1 className="text-xl mb-2">Steps to Goal: {stepsToGoal}</h1>
+                    <h1 className="text-xl mb-2">Heartrate Current: {currentHr}</h1>
+                    <h1 className="text-xl mb-2">Resting Heartrate: {restingHr}</h1>
                 </div>
                 <DashButton text="Sync" action={handleSync} />
                 <DashButton text="Back to Dashboard" redirect="/dashboard" />

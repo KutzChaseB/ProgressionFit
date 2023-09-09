@@ -12,7 +12,7 @@ import Signup from './components/signup/signup';
 
 function App() {
   const [sessionInfo, setSessionInfo] = useState({
-    "id" : 0,
+    "id" : 1,
     "username" : ""
   });
 
@@ -20,7 +20,7 @@ function App() {
     <SessionInfo.Provider value={{sessionInfo, setSessionInfo}}>
         <Routes>
           <Route path="/" element={sessionInfo["id"] <= 0 ? <Login /> : <Navigate to="/dashboard" replace />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={sessionInfo["id"] <= 0 ? <Login /> : <Navigate to="/dashboard" replace />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Dashboard />} />
           <Route path="/healthinfo" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <HealthInfo />} />

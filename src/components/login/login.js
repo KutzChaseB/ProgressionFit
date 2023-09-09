@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { SessionInfo } from "../context/context";
-import {Link} from 'react-router-dom';
 import ProgFitLogo from './ProgFitLogo.png';
 
 const Login = () => {
@@ -17,7 +16,7 @@ const Login = () => {
     };
 
     const validate = () => {
-        fetch("/validate_login", {
+        fetch("/api/login", {
             method : "POST",
             cache : "no-cache",
             headers : {
