@@ -22,6 +22,7 @@ const Dashboard = () => {
                 <DashButton text="Workout" redirect="/workout" />
                 <DashButton text="Track Progress" redirect="/progress" />
                 <DashButton text="Social" redirect="/social" />
+                <DashButton text ="One Rep Max" redirect="/onerepmax" />
                 <DashButton text="Sign Out" action={signOut} />
             </div>
         </div>
