@@ -9,6 +9,7 @@ import Progress from './components/trackprogress/progress';
 import Social from './components/social/social';
 import Login from './components/login/login';
 import Signup from './components/signup/signup';
+import OneRepMax from './components/onerepmax/onerepmax';
 
 function App() {
   const [sessionInfo, setSessionInfo] = useState({
@@ -27,6 +28,7 @@ function App() {
           <Route path="/workout" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Workout />} />
           <Route path="/progress" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Progress />} /> 
           <Route path="/social" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Social />} />
+          <Route path="/onerepmax" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <OneRepMax />} />
         </Routes>
     </SessionInfo.Provider>
   );
