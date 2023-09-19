@@ -26,8 +26,9 @@ const OneRepMax = () => {
     // Calculate the one-rep max based on lift and repetitions
     const oneRepMax = parseFloat(lift) * (1 + 0.0333 *parseInt(repetitions));
     // (lift weight) * (1.0333 * reps)
-    // Set the result in the state
-    setResult(oneRepMax);
+    // Set the result in the state round to 3 decimal places
+    const rounded = Math.round (oneRepMax * 1000) / 1000;
+    setResult(rounded);
   };
 
   return (
