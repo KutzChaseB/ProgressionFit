@@ -8,16 +8,16 @@ const OneRepMax = () => {
 
   const handleLiftChange = (event) => {
     const inputValue = event.target.value;
-    // use regular expressions to validate lift (decimal numbers okay)
-    if (/^\d*\.?\d*$/.test(inputValue)) {
+    // use regular expressions to validate lift (decimal numbers okay) (6 numbers max)
+    if (/^\d{0,4}\.?\d{0,2}$/.test(inputValue)) {
       setLift(inputValue);
     }
   };
 
   const handleRepetitionsChange = (event) => {
     const inputValue = event.target.value;
-    // use regular expressions to validate repetitions (integers only)
-    if (/^\d*$/.test(inputValue)) {
+    // use regular expressions to validate repetitions (integers only) (3 numbers max)
+    if (/^\d{0,3}$/.test(inputValue)) {
     setRepetitions(event.target.value);
     }
   };
