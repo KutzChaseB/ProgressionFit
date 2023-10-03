@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 import DashButton from "../../assets/dashbutton";
 
 const Workout = () => {
-    const [workoutList, setWorkoutList] = useState([]);
+    const [workoutList, setWorkoutList] = useState([["",""],["Bench Press", "Chest"], ["Barbell Squats", "Legs"],]);
     const [lift, setLift] = useState("");
     const [repetitions, setRepetitions] = useState("");
+    const [sets, setSets] = useState("");
+    const [selectedWorkout, setSelectedWorkout] = useState("");
 
     useEffect(() => {
         fetch("/api/workouts", {
@@ -19,6 +21,13 @@ const Workout = () => {
             }
         )
     }, [])
+    const handleSetsChange = (event) => {
+      const inputValue = event.target.value;
+      // use regular expressions to validate repetitions (integers only) (3 numbers max)
+      if (/^\d{0,2}$/.test(inputValue)) {
+      setSets(inputValue);
+      }
+    };
     const handleLiftChange = (event) => {
         const inputValue = event.target.value;
         // use regular expressions to validate lift (decimal numbers okay) (6 numbers max)
@@ -31,8 +40,13 @@ const Workout = () => {
         const inputValue = event.target.value;
         // use regular expressions to validate repetitions (integers only) (3 numbers max)
         if (/^\d{0,3}$/.test(inputValue)) {
-        setRepetitions(event.target.value);
+        setRepetitions(inputValue);
         }
+      };
+
+      const handleSelectedWorkoutChange = (event) => {
+        setSelectedWorkout(event.target.value);
+        console.log(event.target.value);
       };
 
     return (
@@ -42,18 +56,29 @@ const Workout = () => {
                 <div>
                 <div>
                      {/* Fields go here */
-                        <select>
+                        <select
+                          value = {selectedWorkout}
+                          onChange = {handleSelectedWorkoutChange}>
+                          {workoutList.map((w) => 
+                           <option value = {w[0]}>{w[0]}</option>  
 
-                        <option value="fruit">Fruit</option>
-                 
-                        <option value="vegetable">Vegetable</option>
-                 
-                        <option value="meat">Meat</option>
-                 
+                          )}
+                          
                       </select>
                     
                     
                     }
+                     
+           <label className="block text-gray-700 text-sm font-bold mb-2">
+            Sets
+          </label>
+          <input
+            type="text"
+            value={sets}
+            onChange={handleSetsChange}
+            className="border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Enter Sets"
+          />
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Lift
           </label>
