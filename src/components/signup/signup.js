@@ -60,6 +60,7 @@ const Signup = () => {
                         Repeat Password
                     </label>
                     <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="repeatpassword" type="password" placeholder="Password" value={repeatPassword} onChange={handleRepeatPassword} />
+                    <p>Already a member? Login <a href="/login">here</a></p>
                     </div>
                     {password != repeatPassword && <h1>Passwords must match</h1>}
                     <div className="flex items-center justify-between">
