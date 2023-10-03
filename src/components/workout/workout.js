@@ -23,7 +23,7 @@ const Workout = () => {
     }, [])
     const handleSetsChange = (event) => {
       const inputValue = event.target.value;
-      // use regular expressions to validate repetitions (integers only) (3 numbers max)
+      // use regular expressions to validate repetitions (integers only) (2 numbers max)
       if (/^\d{0,2}$/.test(inputValue)) {
       setSets(inputValue);
       }
