@@ -71,7 +71,6 @@ const Workout = () => {
 
       const handleSelectedWorkoutChange = (event) => {
         setSelectedWorkout(event.target.value);
-        console.log(event.target.value);
       };
 
     const logWorkout = async () => {
@@ -107,9 +106,7 @@ const Workout = () => {
                     value = {selectedWorkout}
                     onChange = {handleSelectedWorkoutChange}
                   >
-                    {workoutList.map((w) => 
-                      <option value={w[0]}>{w[0]}</option>  
-                    )}
+                    {workoutList.map((w) => <option value={w[0]}>{w[0]}</option>)}
                   </select>                     
           
           <label className="block text-gray-700 text-sm font-bold mb-2">
