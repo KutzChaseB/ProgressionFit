@@ -27,7 +27,15 @@ const Progress = () => {
     };
 
     const generateGraph = () => {
-        setGraphUrl(encodeURI(`/api/monitor_progress?user_id=${sessionInfo["id"].toString()}&exercise_name=${selectedWorkout}`));
+        // setGraphUrl(encodeURI(`/api/monitor_progress?user_id=${sessionInfo["id"].toString()}&exercise_name=${selectedWorkout}`));
+        fetch(encodeURI(`/api/monitor_progress?user_id=${sessionInfo["id"].toString()}&exercise_name=${selectedWorkout}`), {
+            method : "GET",
+            cache : "no-cache"
+        }).then(
+            res => {
+                setGraphUrl(`${res.url}&${Date.now()}`);
+            }
+        );
     }
 
     return (
