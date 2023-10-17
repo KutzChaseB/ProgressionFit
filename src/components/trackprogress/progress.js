@@ -52,8 +52,6 @@ const Progress = () => {
                 <br /> {
                
 }   
-                
-
                 <DashButton text="Back to Dashboard" redirect="/dashboard" />
             </div>
         </div>
