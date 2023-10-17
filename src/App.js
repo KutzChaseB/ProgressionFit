@@ -13,7 +13,7 @@ import OneRepMax from './components/onerepmax/onerepmax';
 
 function App() {
   const [sessionInfo, setSessionInfo] = useState({
-    "id" : 0,
+    "id" : 1,
     "username" : ""
   });
 

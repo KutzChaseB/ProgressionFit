@@ -49,6 +49,11 @@ const Progress = () => {
                 </div>
                 <DashButton text="View Progress" action={generateGraph} />
                 <img src={graphUrl}></img>
+                <br /> {
+               
+}   
+                
+
                 <DashButton text="Back to Dashboard" redirect="/dashboard" />
             </div>
         </div>
