@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { SessionInfo } from "../context/context";
 import DashButton from "../../assets/dashbutton";
 
 
 
 const HealthInfo = () => {
+    const { sessionInfo, setSessionInfo } = useContext(SessionInfo);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [steps, setSteps] = useState(0);
@@ -27,7 +29,7 @@ const HealthInfo = () => {
         headers : {
           "content-type" : "application/json"
         },
-        body:JSON.stringify(`{"username":"${username}", "password":"${password}"}`)
+        body:JSON.stringify(`{"username":"${username}", "password":"${password}", "user_id":${sessionInfo["id"]}}`)
       }).then (
         res => res.json()
       ).then(
