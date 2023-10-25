@@ -99,6 +99,21 @@ const Workout = () => {
         );
       }
     };
+
+    const shareWorkout = (wid, comment) => {
+      fetch("/api/share_workout", {
+        method : "POST",
+        cache : "no-cache",
+        headers : {
+          "content-type" : "application/json"
+        },
+        body : JSON.stringify({
+          "workout_id" : wid,
+          "user_id" : sessionInfo["id"],
+          "comment" : comment,
+        })
+      })
+    };
     
     return (
         <div className="flex flex-col min-h-screen justify-center items-center bg-pf-gray text-pf-white">
@@ -170,6 +185,7 @@ const Workout = () => {
                         <td>{workout.reps}</td>
                         <td>{workout.sets}</td>
                         <td>{workout.weight}</td>
+                        <DashButton text="Share" action={() => {shareWorkout(workout.logId, "Comment")}}/>
                       </tr>
                     ))}
                   </tbody>
