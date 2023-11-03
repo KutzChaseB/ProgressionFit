@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import {Route, Routes, Navigate } from "react-router-dom"
 import { SessionInfo } from './components/context/context';
 
@@ -10,10 +10,12 @@ import Social from './components/social/social';
 import Login from './components/login/login';
 import Signup from './components/signup/signup';
 import OneRepMax from './components/onerepmax/onerepmax';
+import ShareWorkouts from './components/shareworkouts/shareworkouts';
+import Tips from './components/tips/tips'
 
 function App() {
   const [sessionInfo, setSessionInfo] = useState({
-    "id" : 0,
+    "id" : 1,
     "username" : ""
   });
 
@@ -28,6 +30,8 @@ function App() {
           <Route path="/workout" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Workout />} />
           <Route path="/progress" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Progress />} /> 
           <Route path="/social" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Social />} />
+          <Route path="/social/sharedworkouts" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <ShareWorkouts />} />
+          <Route path="/social/tips" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Tips />} />
           <Route path="/onerepmax" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <OneRepMax />} />
         </Routes>
     </SessionInfo.Provider>
