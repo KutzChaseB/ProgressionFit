@@ -6,11 +6,6 @@ import ShareWorkoutNode from "../../assets/shareworkoutnode";
 const ShareWorkouts = () => {
     const [sharedWorkouts, setSharedWorkouts] = useState([]);
 
-    const testData = [
-        ["Peter", "2023-10-17", "Deadlift", 3, 8, 250, "This workout felt good"],
-        ["Joel", "2023-11-3", "Bench Press", 3, 12, 100, "This workout was hard"]
-    ]
-
     useEffect(() => {
         fetch("/api/share_workout", {
             method : "GET",
@@ -18,7 +13,6 @@ const ShareWorkouts = () => {
             res => res.json()
         ).then(
             data => {
-                console.log(data);
                 setSharedWorkouts(data.reverse());
             }
         );
