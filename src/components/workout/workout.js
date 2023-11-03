@@ -118,7 +118,21 @@ const Workout = () => {
       }
     };
     const handleSubmitComment = () => {
+      console.log(workoutToShare);
+      console.log(commentText);
       //Peter I think you do api call here
+      fetch("/api/share_workout", {
+        method : "POST",
+        cache : "no-cache",
+        headers : {
+            "content-type" : "application/json"
+        },
+        body : JSON.stringify({
+          "user_id" : sessionInfo["id"],
+          "workout_id" : workoutToShare,
+          "comment" : commentText
+        })
+      })
       setCommentModalOpen(false);
     };
   
