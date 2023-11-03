@@ -16,6 +16,7 @@ module.exports = {
       'pf-blue' : '#508CA4',
       'pf-green' : '#0A8754',
       'pf-field' : '#E1E1E1',
+      'pf-white' : '#FFFFFF'
     }
   },
   plugins: [],

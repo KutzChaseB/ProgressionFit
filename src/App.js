@@ -15,7 +15,7 @@ import Tips from './components/tips/tips'
 
 function App() {
   const [sessionInfo, setSessionInfo] = useState({
-    "id" : 1,
+    "id" : 0,
     "username" : ""
   });
 
