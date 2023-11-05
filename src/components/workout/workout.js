@@ -3,6 +3,7 @@ import { SessionInfo } from "../context/context";
 import DashButton from "../../assets/dashbutton";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import LogNode from "../../assets/lognode";
 
 
 
@@ -15,10 +16,6 @@ const Workout = () => {
   const [repetitions, setRepetitions] = useState("");
   const [sets, setSets] = useState("");
   const [selectedWorkout, setSelectedWorkout] = useState("");
-  const [showCommentDialog, setShowCommentDialog] = useState(false);
-  const [commentText, setCommentText] = useState("");
-  const [workoutToShare, setWorkoutToShare] = useState(null);
-  const [isCommentModalOpen, setCommentModalOpen] = useState(false);
 
     const getWorkoutHistory = () => {
       fetch("/api/workout_history", {
@@ -105,42 +102,7 @@ const Workout = () => {
         );
       }
     };
-
-    const shareWorkout = (wid) => {
-      setCommentModalOpen(true);
-      setWorkoutToShare(wid);
-    };
-    const handleCommentChange = (event) => {
-      const inputComment = event.target.value;
-      
-      if (inputComment.length <= 100) {
-        setCommentText(inputComment);
-      }
-    };
-    const handleSubmitComment = () => {
-      console.log(workoutToShare);
-      console.log(commentText);
-      //Peter I think you do api call here
-      fetch("/api/share_workout", {
-        method : "POST",
-        cache : "no-cache",
-        headers : {
-            "content-type" : "application/json"
-        },
-        body : JSON.stringify({
-          "user_id" : sessionInfo["id"],
-          "workout_id" : workoutToShare,
-          "comment" : commentText
-        })
-      })
-      setCommentModalOpen(false);
-    };
-  
-    const shareWorkoutWithComment = () => {
-     
-      setShowCommentDialog(false);
-      setCommentText("");
-    };
+    
     return (
       <div className="flex flex-col min-h-screen justify-center items-center bg-pf-gray text-pf-white">
           <div className="flex flex-col justify-center items-center bg-pf-field text-pf-gray px-5 py-5 rounded-md">
@@ -190,69 +152,21 @@ const Workout = () => {
             </div>
   
           <DashButton text="+" action={logWorkout} />
-  
-          <div>
-            <h1>Workout Data</h1>
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Exercise Name</th>
-                  <th>Reps</th>
-                  <th>Sets</th>
-                  <th>Weight</th>
-                </tr>
-              </thead>
-              <tbody>
-                {workoutHistory.map((workout, index) => (
-                  <tr key={index}>
-                    <td>{workout.date}</td>
-                    <td>{workout.exerciseName}</td>
-                    <td>{workout.reps}</td>
-                    <td>{workout.sets}</td>
-                    <td>{workout.weight}</td>
-                    <DashButton
-                      text="Share"
-                      action={() => shareWorkout(workout.logId)}
-                    />
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-  
+          {
+            workoutHistory.map((workout) => (
+              <LogNode 
+                date = {workout.date}
+                exerciseName = {workout.exerciseName}
+                reps = {workout.reps}
+                sets = {workout.sets}
+                weight = {workout.weight}
+                logId = {workout.logId}
+              />
+            ))
+          }
           <DashButton text="Back to Dashboard" redirect="/dashboard" />
-  
-          {showCommentDialog && (
-            <div className="comment-dialog">
-              <textarea
-                value={commentText}
-                onChange={handleCommentChange}
-                placeholder="Enter a comment (up to 100 characters)"
-              />
-              <button onClick={shareWorkoutWithComment}>Share</button>
-              <button onClick={() => setShowCommentDialog(false)}>Cancel</button>
-            </div>
-          )}
-        <Popup open={isCommentModalOpen} modal closeOnDocumentClick={false}>
-          {(close) => (
-            <div className="comment-modal">
-              <textarea
-                value={commentText}
-                onChange={handleCommentChange}
-                placeholder="Enter a comment (up to 100 characters)"
-              />
-              <div className="comment-modal-buttons">
-                <button onClick={handleSubmitComment}>Submit</button>
-                <button onClick={() => setCommentModalOpen(false)}>Cancel</button>
-              </div>
-            </div>
-          )}
-        </Popup>
       </div>
     </div>
-      
-      
     );
   };
   
