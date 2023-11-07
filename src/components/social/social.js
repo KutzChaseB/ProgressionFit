@@ -10,8 +10,9 @@ const Social = () => {
                 <div>
                     
                 </div>
+                <DashButton text="Submit a Tip" redirect="/social/submittip" />
+                <DashButton text="View Tips" redirect="/social/tips" />
                 <DashButton text="View Shared Workouts" redirect="/social/sharedworkouts" />
-                    <DashButton text="View Tips" redirect="/social/tips" />
                 <DashButton text="Back to Dashboard" redirect="/dashboard" />
             </div>
         </div>

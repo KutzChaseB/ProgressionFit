@@ -12,6 +12,7 @@ import Signup from './components/signup/signup';
 import OneRepMax from './components/onerepmax/onerepmax';
 import ShareWorkouts from './components/shareworkouts/shareworkouts';
 import Tips from './components/tips/tips'
+import SubmitTip from './components/submittip/submittip';
 
 function App() {
   const [sessionInfo, setSessionInfo] = useState({
@@ -32,6 +33,7 @@ function App() {
           <Route path="/social" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Social />} />
           <Route path="/social/sharedworkouts" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <ShareWorkouts />} />
           <Route path="/social/tips" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <Tips />} />
+          <Route path="/social/submittip" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <SubmitTip />} />
           <Route path="/onerepmax" element={sessionInfo["id"] <= 0 ? <Navigate to="/" replace /> : <OneRepMax />} />
         </Routes>
     </SessionInfo.Provider>
