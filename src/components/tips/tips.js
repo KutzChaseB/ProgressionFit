@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import DashButton from "../../assets/dashbutton";
+import TipNode from "../../assets/tipnode";
 
 const Tips = () => {
     const [tips, setTips] = useState([]);
@@ -12,7 +13,6 @@ const Tips = () => {
             res => res.json()
         ).then(
             data => {
-                console.log(data);
                 setTips(data);
             }
         );
@@ -23,7 +23,9 @@ const Tips = () => {
             <div className="flex flex-col justify-center items-center bg-pf-field text-pf-gray px-5 py-5 rounded-md">
                 <h1 className="text-xl font-bold mb-2">Tips</h1>
                 <div>
-                    {/* Fields go here */}
+                    {tips.map(t => (
+                        <TipNode user={t[0]} tip={t[1]} />
+                    ))}
                 </div>
                 <DashButton text="Back" redirect="/social" />
             </div>
