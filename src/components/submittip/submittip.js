@@ -92,6 +92,7 @@ const SubmitTip = () => {
               onChange={handleTipChange}
               className="w-full mb-6 resize-none rounded-lg border border-pf-gray h-[100px] p-1"
               maxLength="100"
+              placeholder="Enter tip here"
             />
         <DashButton text="Submit" action={submitHandler} />
         <DashButton text="Back" redirect="/social" />
