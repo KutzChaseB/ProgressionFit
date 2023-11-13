@@ -64,9 +64,7 @@ const SubmitTip = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
-
-    try {
-      const response = await fetch('/api/tips', {
+      const response = fetch('/api/tips', {
         method: 'POST',
         cache: 'no-cache',
         headers: {
@@ -77,18 +75,6 @@ const SubmitTip = () => {
           tip: tip,
         }),
       });
-
-      if (response.ok) {
-        // Assuming the server responds with a success status
-        // You can handle the success, for example, redirect to the tips page
-       // window.location.href = '/social/tips'; // Replace with your actual tips page URL
-      } else {
-        // error check
-        console.error('Failed to submit tip');
-      }
-    } catch (error) {
-      console.error('Error submitting tip:', error);
-    }
   };
 
   const handleTipChange = (event) => {
@@ -99,27 +85,16 @@ const SubmitTip = () => {
     <div className="flex flex-col min-h-screen justify-center items-center bg-pf-gray text-pf-white">
       <div className="flex flex-col justify-center items-center bg-pf-field text-pf-gray px-5 py-5 rounded-md">
         <h1 className="text-xl font-bold mb-2">Submit a Tip</h1>
-
-        <form onSubmit={submitHandler}>
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2">Enter Tip</label>
             <textarea
               id="tip"
               name="tip"
               value={tip}
               onChange={handleTipChange}
-              className="w-full"
+              className="w-full mb-6 resize-none rounded-lg border border-pf-gray h-[100px] p-1"
+              maxLength="100"
             />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-          >
-            Submit
-          </button>
-          <DashButton text="Back" redirect="/social" />
-        </form>
-
+        <DashButton text="Submit" action={submitHandler} />
+        <DashButton text="Back" redirect="/social" />
         
       </div>
     </div>
