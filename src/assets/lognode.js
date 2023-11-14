@@ -65,18 +65,18 @@ const LogNode = (props) => {
               <button onClick={() => setShowCommentDialog(false)}>Cancel</button>
             </div>
             )}
-            <Popup open={isCommentModalOpen} modal closeOnDocumentClick={false}>
+            <Popup open={isCommentModalOpen} modal closeOnDocumentClick={false} contentStyle={{ width: '20rem' }}>
                 {(close) => (
-                <div className="comment-modal">
+                <div className="comment-modal flex flex-col justify-center items-center bg-pf-field text-pf-gray px-5 py-5 rounded-md">
                     <textarea
                     value={commentText}
                     onChange={handleCommentChange}
                     placeholder="Enter a comment (up to 100 characters)"
+                    className="w-full mb-6 resize-none rounded-lg border border-pf-gray h-[100px] p-1"
+                    maxLength="100"
                     />
-                    <div className="comment-modal-buttons">
-                        <button onClick={handleSubmitComment}>Submit</button>
-                        <button onClick={() => setCommentModalOpen(false)}>Cancel</button>
-                    </div>
+                    <DashButton text="Submit" action={handleSubmitComment} />
+                    <DashButton text="Cancel" action={() => setCommentModalOpen(false)} />
                 </div>
                 )}
             </Popup>
