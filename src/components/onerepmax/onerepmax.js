@@ -17,15 +17,23 @@ const OneRepMax = () => {
   const handleRepetitionsChange = (event) => {
     const inputValue = event.target.value;
     // use regular expressions to validate repetitions (integers only) (3 numbers max)
-    if (/^\d{0,3}$/.test(inputValue)) {
+    if (/^(?!0)\d{0,3}$/.test(inputValue)) {
     setRepetitions(event.target.value);
     }
   };
 
   const calculateOneRepMax = () => {
     // Calculate the one-rep max based on lift and repetitions
-    const oneRepMax = parseFloat(lift) * (1 + 0.0333 *parseInt(repetitions));
-    // (lift weight) * (1.0333 * reps)
+    let oneRepMax = 0;
+    if (parseInt(repetitions) === 1)
+    {
+    oneRepMax = parseFloat(lift);
+    }
+    else{
+    // Implementing Epley Formula
+    oneRepMax = parseFloat(lift) * (1+ .0333 *(parseInt(repetitions)));
+    }
+    // (lift weight) * (1.0333 * (reps))
     // Set the result in the state round to 3 decimal places
     const rounded = Math.round (oneRepMax * 1000) / 1000;
     setResult(rounded);
