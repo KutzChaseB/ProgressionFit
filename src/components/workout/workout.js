@@ -152,6 +152,7 @@ const Workout = () => {
             </div>
   
           <DashButton text="+" action={logWorkout} />
+          <DashButton text="Back to Dashboard" redirect="/dashboard" />
           {
             workoutHistory.map((workout) => (
               <LogNode 
@@ -164,7 +165,7 @@ const Workout = () => {
               />
             ))
           }
-          <DashButton text="Back to Dashboard" redirect="/dashboard" />
+          
       </div>
     </div>
     );
