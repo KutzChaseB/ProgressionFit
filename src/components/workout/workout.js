@@ -153,22 +153,24 @@ const Workout = () => {
   
           <DashButton text="+" action={logWorkout} />
           <DashButton text="Back to Dashboard" redirect="/dashboard" />
-          {
-            workoutHistory.map((workout) => (
-              <LogNode 
-                date = {workout.date}
-                exerciseName = {workout.exerciseName}
-                reps = {workout.reps}
-                sets = {workout.sets}
-                weight = {workout.weight}
-                logId = {workout.logId}
+          <div className="overflow-y-auto max-h-60">
+            {workoutHistory.map((workout) => (
+              <LogNode
+                key={workout.logId} // Make sure to add a unique key for each mapped element
+                date={workout.date}
+                exerciseName={workout.exerciseName}
+                reps={workout.reps}
+                sets={workout.sets}
+                weight={workout.weight}
+                logId={workout.logId}
               />
-            ))
-          }
-          
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
-    );
+  
+);
+    
   };
   
   export default Workout;
