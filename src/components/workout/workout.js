@@ -153,7 +153,7 @@ const Workout = () => {
   
           <DashButton text="+" action={logWorkout} />
           <DashButton text="Back to Dashboard" redirect="/dashboard" />
-          <div className="overflow-y-auto max-h-60">
+          <div className="overflow-y-auto max-h-96">
             {workoutHistory.map((workout) => (
               <LogNode
                 key={workout.logId} 

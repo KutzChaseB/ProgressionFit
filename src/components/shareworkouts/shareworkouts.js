@@ -22,7 +22,7 @@ const ShareWorkouts = () => {
         <div className="flex flex-col min-h-screen justify-center items-center bg-pf-gray text-pf-white">
           <div className="flex flex-col justify-center items-center bg-pf-field text-pf-gray px-5 py-5 rounded-md">
             <h1 className="text-xl font-bold mb-2">Shared Workouts</h1>
-            <div className="overflow-y-auto max-h-60">
+            <div className="overflow-y-auto max-h-96">
               {sharedWorkouts.map((d) => (
                 <ShareWorkoutNode
                   username={d[0]}
