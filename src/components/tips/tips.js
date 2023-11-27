@@ -35,7 +35,7 @@ const Tips = () => {
     <div className="flex flex-col min-h-screen justify-center items-center bg-pf-gray text-pf-white">
       <div className="flex flex-col justify-center items-center bg-pf-field text-pf-gray px-5 py-5 rounded-md">
         <h1 className="text-xl font-bold mb-2">Tips</h1>
-        <div>
+        <div className="overflow-y-auto max-h-60">
           {tips.map((t, index) => (
             <TipNode key={index} user={t[0]} tip={t[1]} />
           ))}
@@ -43,7 +43,7 @@ const Tips = () => {
         <DashButton text="Back" redirect="/social" />
       </div>
     </div>
-  );
+  );  
 };
 
 export default Tips;
