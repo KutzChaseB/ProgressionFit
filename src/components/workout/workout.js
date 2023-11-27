@@ -156,7 +156,7 @@ const Workout = () => {
           <div className="overflow-y-auto max-h-60">
             {workoutHistory.map((workout) => (
               <LogNode
-                key={workout.logId} // Make sure to add a unique key for each mapped element
+                key={workout.logId} 
                 date={workout.date}
                 exerciseName={workout.exerciseName}
                 reps={workout.reps}
