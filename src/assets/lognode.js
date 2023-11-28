@@ -51,7 +51,7 @@ const LogNode = (props) => {
         <div class="bg-pf-light-gray rounded-lg mb-2 p-4">
             <h1>{props.date}</h1>
             <h1>{props.exerciseName} for {props.sets} sets of {props.reps}</h1>
-            <h1>Weight: {props.weight}</h1>
+            <h1>Weight: {props.weight} lbs</h1>
             <DashButton text="Share" action={() => shareWorkout(props.logId)}/>
         
             {showCommentDialog && (
