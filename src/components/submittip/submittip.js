@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { SessionInfo } from '../context/context';
+import { useNavigate } from "react-router-dom";
 import DashButton from '../../assets/dashbutton';
 
 const SubmitTip = () => {
   const { sessionInfo, setSessionInfo } = useContext(SessionInfo);
   const [tip, setTip] = useState('');
 
+  let navigate = useNavigate();
   const submitHandler = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
       const response = fetch('/api/tips', {
@@ -19,6 +21,7 @@ const SubmitTip = () => {
           tip: tip,
         }),
       });
+      navigate("/social");
   };
 
   const handleTipChange = (event) => {

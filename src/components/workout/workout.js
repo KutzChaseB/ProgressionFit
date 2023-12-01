@@ -168,7 +168,6 @@ const Workout = () => {
           </div>
         </div>
       </div>
-  
 );
     
   };
